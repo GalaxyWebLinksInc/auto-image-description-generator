@@ -3,7 +3,7 @@
  * Plugin Name: Auto Image Description Generator
  * Plugin URI:  https://wordpress.org/plugins/auto-image-description/
  * Description:  This plugin provides the feature to generate the Alt, Title and Caption of the images dynamically.
- * Version:     1.0.0
+ * Version:     1.0
  * Author:      Galaxy Weblinks
  * Author URI:  https://www.galaxyweblinks.com/
  * Text Domain: autoimage
@@ -26,7 +26,7 @@ function gwl_autoimage_add_action_plugin_links($actions, $plugin_file) {
     if (!isset($plugin))
         $plugin = plugin_basename(__FILE__);
     if ($plugin == $plugin_file) {
-        $settings = array('settings' => '<a href="' . admin_url('admin.php?page=gwl-autoimage-settingpage') . '">' . __('Settings', 'autoimage') . '</a>');
+        $settings = array('settings' => '<a href="' . esc_url(admin_url('admin.php?page=gwl-autoimage-settingpage')) . '">' . __('Settings', 'autoimage') . '</a>');
        $site_link = array('support' => '<a href="https://www.galaxyweblinks.com/" target="_blank">' . __('Support', 'autoimage') . '</a>');
         $actions = array_merge($actions, $settings);
         $actions = array_merge($actions, $site_link);
@@ -65,7 +65,7 @@ function gwl_autoimage_option_page_display()
   if (!current_user_can('manage_options')) {
     return;
   }
-  include('admin/includes/gwl-auto-image-description-option-page.php');
+  include('admin/includes/auto-image-description-option-page.php');
 }
 
 /**
