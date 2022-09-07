@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Auto Image Description Generator
- * Plugin URI:  https://wordpress.org/plugins/auto-image-description/
+ * Plugin URI:  https://wordpress.org/plugins/auto-image-description-generator/
  * Description:  This plugin provides the feature to generate the Alt, Title and Caption of the images dynamically.
  * Version:     1.0
  * Author:      Galaxy Weblinks
