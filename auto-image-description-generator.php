@@ -41,8 +41,7 @@ add_filter( 'plugin_action_links', 'gwl_autoimage_add_action_plugin_links', 15, 
  *
  * @return void
  */
-function gwl_autoimage_admin_option_page()
-{
+function gwl_autoimage_admin_option_page() {
   $page_title = __('Auto Image Description Generator', 'autoimage');
   $menu_title = __('Auto Image Description Generator', 'autoimage');
   $capability = 'manage_options';
@@ -59,8 +58,7 @@ add_action('admin_menu', 'gwl_autoimage_admin_option_page');
  * Display the gwl auto image description setting page
  * @return void
  */
-function gwl_autoimage_option_page_display()
-{
+function gwl_autoimage_option_page_display() {
   // check user capabilities
   if (!current_user_can('manage_options')) {
     return;
@@ -71,8 +69,7 @@ function gwl_autoimage_option_page_display()
 /**
  * Print the Section text
  */
-function gwl_autoimage_print_section_info()
-{
+function gwl_autoimage_print_section_info() {
   echo '<h4>Choose the desire option as below:</h4>';
 }
 
@@ -81,8 +78,7 @@ function gwl_autoimage_print_section_info()
  *
  * @return void
  */
-function gwl_autoimage_setting_init()
-{
+function gwl_autoimage_setting_init() {
 
   $setting_page = 'gwl-autoimage-settingpage';
   $section_id = 'gwl_autoimage_setting_section_id';
@@ -129,8 +125,7 @@ add_action('admin_init', 'gwl_autoimage_setting_init');
  * @param  array $input
  * @return array $gwl_autoimage_input
  */
-function gwl_autoimage_sanitize($input)
-{
+function gwl_autoimage_sanitize($input) {
   $gwl_autoimage_input = array();
   if (isset($input['caption'])) {
     $gwl_autoimage_input['caption'] = sanitize_text_field($input['caption']);
@@ -149,8 +144,7 @@ function gwl_autoimage_sanitize($input)
  *
  * @return sring $str
  */
-function gwl_autoimage_caption_callback()
-{
+function gwl_autoimage_caption_callback() {
   $options = get_option('gwl_autoimage_settings');
   $caption = isset($options['caption']) ? esc_attr($options['caption']) : '';
   $str = '';
@@ -166,8 +160,7 @@ function gwl_autoimage_caption_callback()
  *
  * @return void
  */
-function gwl_autoimage_description_callback()
-{
+function gwl_autoimage_description_callback() {
   $options = get_option('gwl_autoimage_settings');
   $description = isset($options['description']) ? esc_attr($options['description']) : '';
   $str = '';
@@ -184,8 +177,7 @@ function gwl_autoimage_description_callback()
  * @param  int $post_ID
  * @return void
  */
-function gwl_set_image_meta_upon_image_upload($post_ID)
-{
+function gwl_set_image_meta_upon_image_upload($post_ID) {
 
   // Get the options value
   $autoimage_options = get_option('gwl_autoimage_settings');
