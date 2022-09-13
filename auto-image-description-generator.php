@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Auto Image Description Generator
  * Plugin URI:  https://wordpress.org/plugins/auto-image-description-generator/
- * Description:  This plugin provides the feature to generate the Alt, Title and Caption of the images dynamically.
+ * Description:  This plugin provides the feature to generate the Alt, Title, Description and Caption of the images dynamically.
  * Version:     1.0
  * Author:      Galaxy Weblinks
  * Author URI:  https://www.galaxyweblinks.com/
@@ -69,9 +69,9 @@ function gwl_autoimage_option_page_display() {
 /**
  * Print the Section text
  */
-function gwl_autoimage_print_section_info() {
-  echo '<h4>Choose the desire option as below:</h4>';
-}
+function gwl_autoimage_print_section_info() { ?>
+  <h4>Choose the desire option as below:</h4>
+<?php }
 
 /**
  * Initializing the settings
@@ -127,6 +127,7 @@ add_action('admin_init', 'gwl_autoimage_setting_init');
  */
 function gwl_autoimage_sanitize($input) {
   $gwl_autoimage_input = array();
+  
   if (isset($input['caption'])) {
     $gwl_autoimage_input['caption'] = sanitize_text_field($input['caption']);
   }
@@ -142,17 +143,18 @@ function gwl_autoimage_sanitize($input) {
 /**
  * Caption field html callback
  *
- * @return sring $str
+ * @return void
  */
 function gwl_autoimage_caption_callback() {
   $options = get_option('gwl_autoimage_settings');
-  $caption = isset($options['caption']) ? esc_attr($options['caption']) : '';
-  $str = '';
-  $str .= '<select id="caption" name="gwl_autoimage_settings[caption]">';
-  $str .= '<option value="no"' . selected($caption, "no", false) . '>No</option>';
-  $str .= '<option value="yes"' . selected($caption, "yes", false) . '>Yes</option>';
-  $str .= '</select>';
-  echo $str;
+  $caption = isset($options['caption']) ? $options['caption'] : ''; ?>
+
+  <select id="caption" name="gwl_autoimage_settings[caption]">
+      <option  value="no" <?php selected( esc_attr($caption), 'no' ); ?>><?php esc_html_e('No', 'autoimage'); ?></option>
+      <option value="yes" <?php selected( esc_attr($caption), 'yes' ); ?>><?php esc_html_e('Yes', 'autoimage'); ?></option>
+  </select>
+
+<?php
 }
 
 /**
@@ -161,15 +163,15 @@ function gwl_autoimage_caption_callback() {
  * @return void
  */
 function gwl_autoimage_description_callback() {
-  $options = get_option('gwl_autoimage_settings');
-  $description = isset($options['description']) ? esc_attr($options['description']) : '';
-  $str = '';
-  $str .= '<select id="description" name="gwl_autoimage_settings[description]">';
-  $str .= '<option value="no"' . selected($description, "no", false) . '>No</option>';
-  $str .= '<option value="yes"' . selected($description, "yes", false) . '>Yes</option>';
-  $str .= '</select>';
-  echo $str;
-}
+  $options = get_option('gwl_autoimage_settings'); 
+  $description = isset($options['description']) ? $options['description'] : ''; ?>
+
+  <select id="description" name="gwl_autoimage_settings[description]">
+    <option  value="no" <?php selected( esc_attr($description), 'no' ); ?>><?php esc_html_e('No', 'autoimage'); ?></option>
+      <option value="yes" <?php selected( esc_attr($description), 'yes' ); ?>><?php esc_html_e('Yes', 'autoimage'); ?></option>
+  </select>
+
+<?php }
 
 /**
  * Set the Image description
